@@ -33,17 +33,17 @@ Configure openHAB with the [MQTT binding](https://github.com/openhab/openhab/wik
 **Items**
 
 ```
-Number 	Iota_Temperature	"Temperature [%.1f °C]"	<temperature>	{mqtt="<[home:actuator/5c-cf-7f-0b-67-af/temperature:state:default]"}
-Number 	Iota_Light			"Light [%.1f lux]"  	<sun>			{mqtt="<[home:actuator/5c-cf-7f-0b-67-af/light:state:default]"}
-Switch	Iota_Button			"Button [%s]" 	  						{mqtt="<[home:actuator/5c-cf-7f-0b-67-af/button:state:default]"}
+Number 	Iota_Temperature	"Temperature [%.1f °C]" <temperature>	{mqtt="<[home:actuator/18-FE-00-01-02-03/temperature:state:default]"}
+Number 	Iota_Light			"Light [%.1f lux]"  	<sun>			{mqtt="<[home:actuator/18-FE-00-01-02-03/light:state:default]"}
+Switch	Iota_Button			"Button [%s]" 	  						{mqtt="<[home:actuator/18-FE-00-01-02-03button:state:default]"}
 
 Color 	Iota_Rgb0			"RGB led 0" 			<hue>	   						
-String	Iota_Rgb0_Command	"RGB led 0" 				   			{mqtt=">[home:actuator/5c-cf-7f-0b-67-af/rgb/0:command:*:default]"}
+String	Iota_Rgb0_Command	"RGB led 0" 				   			{mqtt=">[home:actuator/18-FE-00-01-02-03/rgb/0:command:*:default]"}
 
 Color 	Iota_Rgb1			"RGB led 1" 			<hue>   			
-String	Iota_Rgb1_Command	"RGB led 1" 				   			{mqtt=">[home:actuator/5c-cf-7f-0b-67-af/rgb/1:command:*:default]"}
+String	Iota_Rgb1_Command	"RGB led 1" 				   			{mqtt=">[home:actuator/18-FE-00-01-02-03/rgb/1:command:*:default]"}
 
-Switch 	Iota_Led			"Led"  					<switch>		{mqtt=">[home:actuator/5c-cf-7f-0b-67-af/led:command:*:default]"}
+Switch 	Iota_Led			"Led"  					<switch>		{mqtt=">[home:actuator/18-FE-00-01-02-03led:command:*:default]"}
 
 ``` 
 
