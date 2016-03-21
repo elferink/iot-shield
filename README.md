@@ -14,10 +14,10 @@
 | Shield     | [WeMos D1 Mini](http://www.wemos.cc/wiki/doku.php?id=en:d1_mini#diagram) | [ESP8266 Arduino Core](https://github.com/esp8266/Arduino) |
 |------------|---------------|----------------------|
 | TEMT6000X01| A0            | ADC                  |
-| LM75B OS   | D0            | D16~                 |
+| nc         | D0            | D16~                 |
 | LM75B SCL  | D1            | D5~ SCL              |
 | LM75B SDA  | D2            | D4~ SDA              |
-| Button     | D3            | D0~                 |
+| Button     | D3            | D0~                  |
 | Yellow LED | D4            | D2~                  |
 | APA102 SCK | D5            | D14~ SCK             |
 | nc         | D6            | D12~ MISO            |
