@@ -17,7 +17,7 @@
 | LM75B OS   | D0            | D16~                 |
 | LM75B SCL  | D1            | D5~ SCL              |
 | LM75B SDA  | D2            | D4~ SDA              |
-| Button     | D3            | D16~                 |
+| Button     | D3            | D0~                 |
 | Yellow LED | D4            | D2~                  |
 | APA102 SCK | D5            | D14~ SCK             |
 | nc         | D6            | D12~ MISO            |
