@@ -27,5 +27,4 @@
 
 
 ### IoT Artwork 
-* [Internet of Things - IoT in Icons Pattern](https://openclipart.org/detail/242296/internet-of-things-iot-in-icons-pattern) ([InkscapeBoy](https://openclipart.org/user-detail/InkscapeBoy))
 * [FOSSASIA- Internet of Things Entry](https://openclipart.org/detail/242084/fossasia-internet-of-things-entry) ([Resplendent](https://openclipart.org/user-detail/Resplendent))
