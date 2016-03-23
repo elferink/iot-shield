@@ -8,7 +8,7 @@
 * Digital temperature sensor ([LM75B](http://www.nxp.com/documents/data_sheet/LM75B.pdf))
 * Two [APA102C](https://cpldcpu.files.wordpress.com/2014/08/apa-102c-super-led-specifications-2014-en.pdf) RGB LED
 * Yellow LED ([APT2012YC](http://www.kingbrightusa.com/images/catalog/SPEC/APT2012YC.pdf))
-* Pushbutton Switch
+* Pushbutton Switch [B3F-4055](https://www.omron.com/ecb/products/pdf/en-b3f.pdf)
 
 ## Reference
 | Shield     | [WeMos D1 Mini](http://www.wemos.cc/wiki/doku.php?id=en:d1_mini#diagram) | [ESP8266 Arduino Core](https://github.com/esp8266/Arduino) |
