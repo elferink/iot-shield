@@ -23,8 +23,3 @@
 | nc         | D6            | D12~ MISO            |
 | APA102 MOSI| D7            | D13~ MOSI            |
 | nc         | D8            | D15~ SS              |
-
-
-
-### IoT Artwork 
-* [FOSSASIA- Internet of Things Entry](https://openclipart.org/detail/242084/fossasia-internet-of-things-entry) ([Resplendent](https://openclipart.org/user-detail/Resplendent))
