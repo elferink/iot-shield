@@ -15,7 +15,8 @@ void setupTemperature() {
 
 void updateTemperature() {
   sensor.shutdown(false);
-  lastTemperature = sensor.temp();;
+  delay(100);
+  lastTemperature = sensor.temp();
   
   Serial.print(lastTemperature);
   Serial.println(" C");
