@@ -17,9 +17,11 @@ void setLed(bool state) {
 
 void ledOn() {
   setLed(HIGH);
+  led_on = true;
 }
 
 void ledOff() {
   setLed(LOW);
+  led_on = false;
 }
 

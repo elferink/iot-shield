@@ -11,15 +11,13 @@ void setup() {
   setupGeneral();
   setupWifi();
   setupTemperature();
-  setupLight();
   setupLed();
   setupButton();
   setupApa();
 }
 
 void loop() {
-  loopTemperature();
-  loopLight();
   loopButton();
   loopApa();
+  loopReport();
 }

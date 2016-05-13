@@ -1,42 +1,41 @@
+#include "OneButton.h"
+
 #define BUTTONPIN 0 // D3
 
-int lastPush = 0;
-int debounceDelay = 1000; // 1 second
-
-int pushed = 0;
+OneButton button(BUTTONPIN, true);
 
 void setupButton() {
   pinMode(BUTTONPIN, INPUT);
-  attachInterrupt(digitalPinToInterrupt(BUTTONPIN), buttonPressed, FALLING);
+  
+  button.setClickTicks(300);
+  button.setPressTicks(600);
+
+  button.attachClick(singleClick);
+  button.attachDoubleClick(doubleClick);
+  button.attachLongPressStart(longPress);
 }
 
-void buttonPressed() {
-  int state = digitalRead(BUTTONPIN);
-  if (state == LOW && ((millis() - lastPush) > debounceDelay)) {
-    lastPush = millis();
-    // no other actions while handling interrupt 
-    pushed = 1;
+void singleClick() {
+  if (!apa_on && !led_on) {
+    ledOn();
+  } else if (led_on) {
+    ledOff();
+    apaOn();
+  } else if (apa_on) {
+    apaOff();
   }
+}
+
+void doubleClick() {
+  nextPattern();
+}
+
+void longPress() {
+  report();
 }
 
 void loopButton() {
-  if (pushed) {
-    Serial.println("Button pushed");
-    if (!apa_on && !led_on) {
-      led_on = true;
-      ledOn();
-    } else if (led_on) {
-      led_on = false;
-      ledOff();
-
-      apa_on = true;
-    } else if (apa_on) {
-      apa_on = false;
-      apaOff();
-    }
-    
-    pushed = 0;
-  }
+  button.tick();
 }
 
 
