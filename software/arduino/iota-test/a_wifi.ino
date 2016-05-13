@@ -3,6 +3,8 @@
 WiFiClient espClient;
 char mac[18];
 
+boolean wifi_connected = false;
+
 void setupWifi() {
   WiFi.mode(WIFI_STA);
 
@@ -20,14 +22,16 @@ void setupWifi() {
   Serial.println((char*)mac);
 
   WiFi.begin(ssid, password);
+}
 
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
+void loopWifi() {
+  if (!wifi_connected) {
+    if (WiFi.status() == WL_CONNECTED) {
+      wifi_connected = true;
+      Serial.println("Wifi connected");
+      Serial.print("IP: ");
+      Serial.println(WiFi.localIP());
+    }
   }
-
-  Serial.println();
-  Serial.print("IP: ");
-  Serial.println(WiFi.localIP());
 }
 

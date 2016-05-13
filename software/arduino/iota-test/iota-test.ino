@@ -20,4 +20,5 @@ void loop() {
   loopButton();
   loopApa();
   loopReport();
+  loopWifi();
 }

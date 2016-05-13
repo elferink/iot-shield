@@ -18,7 +18,7 @@ uint8_t currentPatternNumber = 0;
 uint8_t color = 0;
 
 typedef void (*SimplePatternList[])();
-SimplePatternList patterns = { rgb, rainbow };
+SimplePatternList patterns = { rainbow, rgb };
 
 void setupApa() {
   FastLED.addLeds<LED_TYPE, APADATAPIN, APACLOCKPIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
