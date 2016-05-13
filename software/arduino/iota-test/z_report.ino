@@ -21,16 +21,16 @@ void report() {
 
 void docs(const char* light_state, const char* temp_state, char* temp_value, char* light_value) {
   String data;
-  data += "https://docs.google.com/forms/d/1aKtosgA0Q0woMy_FbvWl3Q-Z8jQyjt4yXkNLpvyPMFY/formResponse?";
-  data += "entry.1718414522=";
+  data += "http://api.thingspeak.com/update?api_key=0D8KKHE9VNC7YCEZ"
+  data += "&field1=";
   data += mac;
-  data += "&entry.1272450683=";
+  data += "&field2="";
   data += light_state;
-  data += "&entry.776780075=";
+  data += "&field3="=";
   data += temp_state;
-  data += "&entry.434994815=";
+  data += "&field4=";
   data += temp_value;
-  data += "&entry.695034911=";
+  data += "&field5=";
   data += light_value;
 
   Serial.println(data);
