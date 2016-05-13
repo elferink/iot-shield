@@ -24,9 +24,9 @@ void docs(const char* light_state, const char* temp_state, char* temp_value, cha
   data += "http://api.thingspeak.com/update?api_key=0D8KKHE9VNC7YCEZ"
   data += "&field1=";
   data += mac;
-  data += "&field2="";
+  data += "&field2=";
   data += light_state;
-  data += "&field3="=";
+  data += "&field3=";
   data += temp_state;
   data += "&field4=";
   data += temp_value;
