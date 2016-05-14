@@ -52,39 +52,48 @@ void doubleClick() {
 }
 
 void longPress() {
-  getTemperature();
-  getLuminance();
+  readSensors();
 }
 
 /*
    Temperatuursensor
 */
-void getTemperature() {
+float getTemperature() {
   // Sensor activeren
   temp_sensor.shutdown(false);
   delay(100);
 
   float temperature = temp_sensor.temp();
-  Serial.print("Temperatuur: ");
-  Serial.print(temperature);
-  Serial.println("°C");
 
   // Sensor deactiveren
   temp_sensor.shutdown(true);
+
+  return temperature;
 }
 
 /*
    Lichtsensor
 */
-void getLuminance() {
+float getLuminance() {
   // Meet voltage op analoge input en reken dit om in het equivalente aantal lux
   float volts = analogRead(A0) * 3.3 / 1024.0;
   float amps = volts / 10000.0;  // 10k weerstand
   float microamps = amps * 1000000;
   float lux = microamps * 2.0;
 
+  return lux;
+}
+
+/*
+   Lees sensoren uit
+*/
+void readSensors() {
+  Serial.print("Temperatuur: ");
+  Serial.print(getTemperature());
+  Serial.println("°C");
+
   Serial.print("Hoevelheid licht: ");
-  Serial.print(lux);
+  Serial.print(getLuminance());
   Serial.println(" lux");
 }
 
@@ -133,7 +142,7 @@ void setup() {
   setLed(false); // led uit
 
   // Initialiseer RGB leds
-  FastLED.addLeds<RGB_LED_TYPE, RGB_LED_DATA_PIN, RGB_LED_CLOCK_PIN, RGB_COLOR_ORDER>(leds, RGB_NUM_LEDS); //.setCorrection(TypicalLEDStrip);
+  FastLED.addLeds<RGB_LED_TYPE, RGB_LED_DATA_PIN, RGB_LED_CLOCK_PIN, RGB_COLOR_ORDER>(leds, RGB_NUM_LEDS).setCorrection(TypicalLEDStrip);
   FastLED.setBrightness(RGB_LED_BRIGHTNESS);
   setRgbLeds(CRGB::Black); // beide leds uit
 
@@ -153,11 +162,10 @@ void setup() {
   Serial.println(WiFi.localIP());
 
   // Lees beide sensoren uit
-  getTemperature();
-  getLuminance();
+  readSensors();
 }
 
-/**
+/*
    Functie wordt continue aangroepen, voeg hier je eigen logica aan toe
 */
 void loop() {
