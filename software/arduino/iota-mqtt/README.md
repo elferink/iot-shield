@@ -9,7 +9,7 @@ This Arduino sketch makes all functionality of the board available through MQTT.
 
 * Arduino Client for MQTT: https://github.com/knolleary/pubsubclient
 * LM75 Arduino Library: https://github.com/thefekete/LM75
-* APA102 library for Arduino: https://github.com/pololu/apa102-arduino 
+* FastLED library: https://github.com/FastLED/FastLED
 
 ## Topics
 
@@ -22,8 +22,8 @@ Format: ```actuator/<mac>/<item>```
 | actuator/18-FE-00-01-02-03/temperature | -55 to 125 | Read  |Temperature, in degrees Celsius |
 | actuator/18-FE-00-01-02-03/button | ON | Read | Switch button pressed |
 | actuator/18-FE-00-01-02-03/led | ON or OFF | Write |Controls the onboard led |
-| actuator/18-FE-00-01-02-03/rgb/0 | 0 0 0 to 255 255 255 | Write | Controls first RGB led |
-| actuator/18-FE-00-01-02-03/rgb/1 | 0 0 0 to 255 255 255 | Write | Controls second RGB led |
+| actuator/18-FE-00-01-02-03/rgb/0 | h,s,v (0-360,0-100,0-100) | Write | Controls first RGB led |
+| actuator/18-FE-00-01-02-03/rgb/1 | h,s,v (0-360,0-100,0-100) | Write | Controls second RGB led |
  
 ## openHAB 
 
@@ -37,11 +37,8 @@ Number 	Iota_Temperature	"Temperature [%.1f °C]" <temperature>	{mqtt="<[home:ac
 Number 	Iota_Light			"Light [%.1f lux]"  	<sun>			{mqtt="<[home:actuator/18-FE-00-01-02-03/light:state:default]"}
 Switch	Iota_Button			"Button [%s]" 	  						{mqtt="<[home:actuator/18-FE-00-01-02-03button:state:default]"}
 
-Color 	Iota_Rgb0			"RGB led 0" 			<hue>	   						
-String	Iota_Rgb0_Command	"RGB led 0" 				   			{mqtt=">[home:actuator/18-FE-00-01-02-03/rgb/0:command:*:default]"}
-
-Color 	Iota_Rgb1			"RGB led 1" 			<hue>   			
-String	Iota_Rgb1_Command	"RGB led 1" 				   			{mqtt=">[home:actuator/18-FE-00-01-02-03/rgb/1:command:*:default]"}
+Color	Iota_Rgb0			"RGB led 0" 			<hue>  			{mqtt=">[home:actuator/5c-cf-7f-10-7e-2d/rgb/0:command:*:default]"}
+Color 	Iota_Rgb1			"RGB led 1" 			<hue>   		{mqtt=">[home:actuator/5c-cf-7f-10-7e-2d/rgb/1:command:*:default]"}
 
 Switch 	Iota_Led			"Led"  					<switch>		{mqtt=">[home:actuator/18-FE-00-01-02-03led:command:*:default]"}
 
@@ -68,28 +65,6 @@ sitemap iota label="iota"
 ```
 import org.openhab.core.library.types.*
 import java.awt.Color
-
-rule "iota RGB led 0"
-when
-	Item Iota_Rgb0 changed 
-then
-	var HSBType hsbValue = Iota_Rgb0.state as HSBType
-	var Color color = hsbValue.toColor();
-	var String msg = color.red + " " + color.green + " " + color.blue + " "
-
-  	sendCommand(Iota_Rgb0_Command, msg)
-end
-
-rule "iota RGB led 1"
-when
-	Item Iota_Rgb1 changed 
-then
-	var HSBType hsbValue = Iota_Rgb1.state as HSBType
-	var Color color = hsbValue.toColor();
-	var String msg = color.red + " " + color.green + " " + color.blue + " "
-
-  	sendCommand(Iota_Rgb1_Command, msg)
-end
 
 rule "iota button"
 when

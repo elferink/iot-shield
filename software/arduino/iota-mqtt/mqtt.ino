@@ -44,17 +44,27 @@ void callback(char* topic, byte* payload, unsigned int length) {
     }
   }
   else if (topic_str.indexOf("rgb") != -1) {
-    int r, g, b;
+    int h, s, v;
 
-    r = getValue(content, ' ', 0).toInt();
-    g = getValue(content, ' ', 1).toInt();
-    b = getValue(content, ' ', 2).toInt();
+    h = getValue(content, ',', 0).toInt();
+    s = getValue(content, ',', 1).toInt();
+    v = getValue(content, ',', 2).toInt();
+
+    // x in openHAB - FastLED
+    // hue                0-360 - 0-255
+    // sat                0-100 - 0-255
+    // brightness (value) 0-100 - 0-255
+    h  = ((float)h/360)*255;
+    s = ((float)s/100)*255;
+    v = ((float)v/100)*255;
+
+    CHSV color = CHSV(h,s,v);
 
     if (topic_str.endsWith("0")) {
-      setLed(0, r, g, b);
+      setRgbLed(0, color);
     }
     else if (topic_str.endsWith("1")) {
-      setLed(1, r, g, b);
+      setRgbLed(1, color);
     } 
   }
 }

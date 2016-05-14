@@ -1,34 +1,31 @@
-#include <APA102.h>
+#include <FastLED.h>
+
+#define LED_PIN     5
+#define NUM_LEDS    2
+#define BRIGHTNESS  32
+#define LED_TYPE    APA102
+#define COLOR_ORDER BGR
+
+CRGB leds[NUM_LEDS];
 
 #define APADATAPIN 13 // D7
 #define APACLOCKPIN 14 // D5
 
-const uint8_t brightness = 31;
-const uint16_t ledCount = 2;
-
-APA102<APADATAPIN, APACLOCKPIN> strip;
-rgb_color colors[ledCount];
+void setRgbLed(int ledno, CHSV color);
 
 void setupApa() {
-  for (int i = 0; i < ledCount; i++) {
-      colors[i] = rgb_color{0,0,0};      
-  }
-  strip.write(colors, ledCount, brightness);
+  FastLED.addLeds<LED_TYPE, APADATAPIN, APACLOCKPIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+  FastLED.setBrightness(BRIGHTNESS);
+  apaOff();
 }
 
-void setLed(int ledno, int r, int g, int b) {
-  colors[ledno].red = r;
-  colors[ledno].green = g;
-  colors[ledno].blue = b;
-  strip.write(colors, ledCount, brightness);
+void apaOff() {
+  leds[0] = CRGB::Black;
+  leds[1] = CRGB::Black;
+  FastLED.show();
 }
 
-void setLeds(int r, int g, int b) {
-  for (int i = 0; i < ledCount; i++) {
-    colors[i].red = r;
-    colors[i].green = g;
-    colors[i].blue = b;
-  }
-  strip.write(colors, ledCount, brightness);
+void setRgbLed(int ledno, CHSV color) {
+  leds[ledno].setHSV(color.hue, color.sat, color.val);
+  FastLED.show();
 }
-
