@@ -10,7 +10,7 @@ Installeer de volgende software **voordat de workshop begint**:
 - Installeer de driver voor de USB-chip van het ESP8266 bordje (alleen Mac en Windows). Deze zijn hier te vinden: [http://www.wemos.cc/downloads/](http://www.wemos.cc/downloads/)
 - Start de Arduino IDE en ga `Arduino`, `Preferences` en vul bij `Additional Boards Manager URLs` dit in: `http://arduino.esp8266.com/stable/package_esp8266com_index.json`
 - Ga naar `Tools`, `Board: ..`, `Boards Manager` en zoek hier op 'esp8266'. Installeer de laatste versie (2.2.0).
-- We hebben een testsketch gemaakt, download deze hier: <linkje>. Open deze vervolgens in de Arduino IDE. 
+- We hebben een testsketch gemaakt, download deze hier: [iota-workshop.zip](../../../assets/iota-workshop.zip). Pak de ZIP-file uit en open het `iota-workshop.ino` bestand met de Arduino IDE.
 - Voor deze sketch heb je een aantal libraries nodig. Download de volgende ZIP-files en voeg deze toe aan de Arduino IDE via `Sketch`, `Include library`, `Add .ZIP Library`. 
 	- [LM75 Arduino Library](https://github.com/thefekete/LM75/archive/master.zip)
 	- [FastLED](https://github.com/FastLED/FastLED/archive/87211a5a7c2e143b9d172d9ce62151049eb7b7b2.zip)
