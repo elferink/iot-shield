@@ -19,14 +19,14 @@ void setup() {
 
   WiFi.mode(WIFI_STA);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
-  Serial.print("Wifi verbinden");
+  Serial.print("Connecting wifi");
 
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
   }
 
-  Serial.println(" verbonden!");
+  Serial.println(" connected!");
   Serial.print("IP: ");
   Serial.println(WiFi.localIP());
 
