@@ -12,7 +12,7 @@ Installeer de volgende software **voordat de workshop begint**:
 - Ga naar `Tools`, `Board: ..`, `Boards Manager` en zoek hier op 'esp8266'. Installeer de laatste versie (2.2.0).
 - Selecteer onder `Tools`, `Board`, `WeMoS D1 R2 & mini`
 - Nu heb je een aantal libraries nodig. Download de *3* ZIP-files uit de directory en voeg deze toe aan de Arduino IDE via `Sketch`, `Include library`, `Add .ZIP Library`. 
-	- [Libraries@Google Drive](https://drive.google.com/folderview?id=0B8pTpNZu7QutWDUyU2FjX2xZT2M)
+	- [libraries@Google Drive](https://drive.google.com/folderview?id=0B8pTpNZu7QutWDUyU2FjX2xZT2M)
 - We hebben een testsketch gemaakt, download deze hier: [iota-workshop.zip](https://drive.google.com/uc?export=download&id=0B8pTpNZu7QutcUxvRGRIRVBrdFU). Pak de ZIP-file uit en open het `iota-workshop.ino` bestand met de Arduino IDE.
 - Compile de sketch via `Sketch`, `Verify/Compile`. Dit zou nu moeten lukken!
 - Tot op de workshop!
