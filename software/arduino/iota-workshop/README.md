@@ -6,16 +6,14 @@ Volg deze handleiding om snel wat leuks met je iota bordje te kunnen ontwikkelen
 
 Installeer de volgende software **voordat de workshop begint**:
 
-- Download en installeer de laatste Arduino IDE (nu 1.6.9) voor jouw OS. Link: [https://www.arduino.cc/en/Main/Software](https://www.arduino.cc/en/Main/Software)
-- Installeer de driver voor de USB-chip van het ESP8266 bordje (alleen Mac en Windows). Deze zijn hier te vinden: [http://www.wemos.cc/downloads/](http://www.wemos.cc/downloads/)
+- Download en installeer de laatste Arduino IDE (nu 1.6.9) voor jouw OS. Link: [installs@Google Drive](https://drive.google.com/folderview?id=0BySKoKNET9qkZlQxTGVXdlo1b0k)
+- Installeer de driver voor de USB-chip van het ESP8266 bordje (alleen nodig voor Mac en Windows). Deze staan in dezelfde directory als de Arduino IDE.
 - Start de Arduino IDE en ga `Arduino`, `Preferences` en vul bij `Additional Boards Manager URLs` dit in: `http://arduino.esp8266.com/stable/package_esp8266com_index.json`
 - Ga naar `Tools`, `Board: ..`, `Boards Manager` en zoek hier op 'esp8266'. Installeer de laatste versie (2.2.0).
 - Selecteer onder `Tools`, `Board`, `WeMoS D1 R2 & mini`
-- We hebben een testsketch gemaakt, download deze hier: [iota-workshop.zip](../../../assets/iota-workshop.zip?raw=true). Pak de ZIP-file uit en open het `iota-workshop.ino` bestand met de Arduino IDE.
-- Voor deze sketch heb je een aantal libraries nodig. Download de volgende ZIP-files en voeg deze toe aan de Arduino IDE via `Sketch`, `Include library`, `Add .ZIP Library`. 
-	- [LM75 Arduino Library](https://github.com/thefekete/LM75/archive/master.zip)
-	- [FastLED](https://github.com/FastLED/FastLED/archive/87211a5a7c2e143b9d172d9ce62151049eb7b7b2.zip)
-	- [OneButton](https://github.com/mathertel/OneButton/archive/master.zip)
+- Nu heb je een aantal libraries nodig. Download de *3* ZIP-files uit de directory en voeg deze toe aan de Arduino IDE via `Sketch`, `Include library`, `Add .ZIP Library`. 
+	- [Libraries@Google Drive](https://drive.google.com/folderview?id=0B8pTpNZu7QutWDUyU2FjX2xZT2M)
+- We hebben een testsketch gemaakt, download deze hier: [iota-workshop.zip](https://drive.google.com/uc?export=download&id=0B8pTpNZu7QutcUxvRGRIRVBrdFU). Pak de ZIP-file uit en open het `iota-workshop.ino` bestand met de Arduino IDE.
 - Compile de sketch via `Sketch`, `Verify/Compile`. Dit zou nu moeten lukken!
 - Tot op de workshop!
 
