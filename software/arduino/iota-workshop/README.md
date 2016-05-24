@@ -6,7 +6,7 @@ Volg deze handleiding om snel wat leuks met je iota bordje te kunnen ontwikkelen
 
 Installeer de volgende software **voordat de workshop begint**:
 
-- Download en installeer de laatste Arduino IDE (nu 1.6.9) voor jouw OS. Link: <a href="https://drive.google.com/folderview?id=0BySKoKNET9qkZlQxTGVXdlo1b0k" target="_blank">installs@Google Drive...</a>
+- Download en installeer de laatste Arduino IDE (nu 1.6.9) voor jouw OS. Link: [installs@Google Drive](https://drive.google.com/folderview?id=0BySKoKNET9qkZlQxTGVXdlo1b0k)
 - Installeer de driver voor de USB-chip van het ESP8266 bordje (alleen nodig voor Mac en Windows). Deze staan in dezelfde directory als de Arduino IDE.
 - Start de Arduino IDE en ga `Arduino`, `Preferences` en vul bij `Additional Boards Manager URLs` dit in: `http://arduino.esp8266.com/stable/package_esp8266com_index.json`
 - Ga naar `Tools`, `Board: ..`, `Boards Manager` en zoek hier op 'esp8266'. Installeer de laatste versie (2.2.0).
