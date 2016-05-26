@@ -92,7 +92,7 @@ void readSensors() {
   Serial.print(getTemperature());
   Serial.println("°C");
 
-  Serial.print("Hoevelheid licht: ");
+  Serial.print("Hoeveelheid licht: ");
   Serial.print(getLuminance());
   Serial.println(" lux");
 }
