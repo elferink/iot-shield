@@ -12,7 +12,7 @@
   <script type="text/javascript" src="javascripts/script.js"></script>
 
   <title>Iota</title>
-  <meta name="description" content="Repo voor IoT workshop Topiconf 2016">
+  <meta name="description" content="Repo voor Topicus IoT workshop">
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
@@ -29,7 +29,7 @@
       <h1 class="title">Iota</h1>
     </header>
     <div id="container">
-      <p class="tagline">IoT workshop Topiconf 2016</p>
+      <p class="tagline">Topicus IoT workshop</p>
       <div id="main" role="main">
         <div class="download-bar">
         <div class="inner">
@@ -48,34 +48,25 @@
 <p>Installeer de volgende software <strong>voordat de workshop begint</strong>:</p>
 
 <ul>
-<li>Download en installeer de laatste Arduino IDE (nu 1.6.9) voor jouw OS uit deze directory:
-
-<ul>
-<li> <a href="https://drive.google.com/folderview?id=0B8pTpNZu7Qutcy1oOHNDcG1Ja3c" target="_blank">installs@Google Drive</a></li>
-</ul>
+<li>Download en installeer de laatste Arduino IDE (nu 1.6.12) voor jouw OS uit deze directory:
+  <ul>
+    <li><a href="https://drive.google.com/folderview?id=0B8pTpNZu7Qutcy1oOHNDcG1Ja3c" target="_blank">installs@Google Drive</a></li>
+  </ul>
 </li>
 <li>Installeer de driver voor de USB-chip van het ESP8266 bordje (alleen nodig voor Mac en Windows). Deze staan in dezelfde directory als de Arduino IDE. Vergeet niet te rebooten als hier om gevraagd wordt.</li>
-<li>Start de Arduino IDE en ga naar <code>Arduino</code>, <code>Preferences</code> en vul bij <code>Additional Boards Manager URLs</code> dit in: <code>http://arduino.esp8266.com/stable/package_esp8266com_index.json</code>
-</li>
+<li>Start de Arduino IDE en ga naar <code>Arduino</code>, <code>Preferences</code> en vul bij <code>Additional Boards Manager URLs</code> dit in: <code>http://arduino.esp8266.com/stable/package_esp8266com_index.json</code></li>
 <li>Ga naar <code>Tools</code>, <code>Board: ..</code>, <code>Boards Manager</code> en zoek hier op 'esp8266'. Installeer de laatste versie (2.2.0).</li>
-<li>Selecteer onder <code>Tools</code>, <code>Board</code>, <code>WeMoS D1 R2 &amp; mini</code>
+<li>Selecteer onder <code>Tools</code>, <code>Board</code>, <code>WeMoS D1 R2 &amp; mini</code></li>
+<li>Nu heb je een aantal libraries nodig. Download de volgende <strong>3</strong> ZIP-files en voeg deze toe aan de Arduino IDE via <code>Sketch</code>, <code>Include library</code>, <code>Add .ZIP Library</code>.
+  <ul>
+    <li><a href="https://drive.google.com/uc?export=download&amp;id=0B8pTpNZu7QutR0VBdUtuRzNwUmc" target="_blank">FastLED</a></li>
+    <li><a href="https://drive.google.com/uc?export=download&amp;id=0B8pTpNZu7QutMVRBYkVvZzJTV0E" target="_blank">LM75</a></li>
+    <li><a href="https://drive.google.com/uc?export=download&amp;id=0B8pTpNZu7QutRjY4YUQ5UmN2U1E" target="_blank">OneButton</a></li>
+  </ul>
 </li>
-<li>Nu heb je een aantal libraries nodig. Download de volgende <strong>3</strong> ZIP-files en voeg deze toe aan de Arduino IDE via <code>Sketch</code>, <code>Include library</code>, <code>Add .ZIP Library</code>. 
-
-<ul>
-<li><a href="https://drive.google.com/uc?export=download&amp;id=0B8pTpNZu7QutR0VBdUtuRzNwUmc" target="_blank">FastLED</a></li>
-<li><a href="https://drive.google.com/uc?export=download&amp;id=0B8pTpNZu7QutMVRBYkVvZzJTV0E" target="_blank">LM75</a></li>
-<li><a href="https://drive.google.com/uc?export=download&amp;id=0B8pTpNZu7QutRjY4YUQ5UmN2U1E" target="_blank">OneButton</a></li>
-</ul>
-</li>
-<li>We hebben een testsketch gemaakt, download deze hier:
-
-<ul>
-<li> <a href="https://drive.google.com/uc?export=download&amp;id=0BySKoKNET9qkMWFRa1llRnpIQjA" target="_blank">iota-workshop.zip</a></li>
-</ul>
-</li>
-<li> Pak de ZIP-file uit en open het <code>iota-workshop.ino</code> bestand met de Arduino IDE.</li>
-<li>Compile de sketch via <code>Sketch</code>, <code>Verify/Compile</code>. Dit zou nu moeten lukken!</li>
+<li>Download de repo <a href="https://github.com/topicusonderwijs/iota/archive/master.zip" target="_blank">hier</a><br/>
+of doe een <code>git clone https://github.com/topicusonderwijs/iota.git</code></li>
+<li>Ga naar de directory <code>software/arduino/iota-workshop</code><br/>en open <code>iota-workshop.ino</code> met de Arduino IDE.</li>
 </ul>
 
 <p><strong>IoTa aansluiten</strong></p>
@@ -86,6 +77,8 @@
 
 <p>De waarde voor <code>port</code> zal per OS verschillen. </p>
 
+<p>Vul in de Arduino IDE Editor in de Sketch de <code>WIFI_SSID</code> en <code>WIFI_PASSWORD</code> in.</p>
+
 <p>Vervolgens kun je via <code>Sketch</code>, <code>Upload</code> je code in de ESP8266 laden. </p>
 
 <p>De testsketch verbindt met wifi en toont initieel de waarde van de twee sensoren via de <code>serial monitor</code>. Deze kun je openen via het icoontje rechtsboven in de Arduino IDE. Selecteer in dit nieuwe venster rechtsonder <code>115200 baud</code>.</p>
@@ -94,7 +87,7 @@
 
 <ul>
 <li>1x klikken: led aan/uit</li>
-<li>dubbelklikken: rgb leds aan/uit</li>
+<li>dubbelklikken: rgb leds aan/uit (groen)</li>
 <li>vasthouden: sensorwaarden tonen</li>
 </ul>
 
@@ -120,7 +113,7 @@
 
 <li><a href="https://ifttt.com" target="_blank">IFTTT</a> (If This Then That) is een handige clouddienst die verschillende andere clouddiensten (Twitter, Dropbox, Philips Hue etc.) met elkaar kan verbinden. Via het Maker channel kun je hier ook je IoTa bordje mee koppelen. Zie <a href="https://github.com/topicusonderwijs/iota/tree/master/software/arduino/iota-ifttt">deze sketch</a> voor een voorbeeld.</li>
 
-<li>Nog meer voorbeeldsketches vind je <a href="https://github.com/topicusonderwijs/iota/tree/master/software/arduino/" target="_blank">hier</a> in de IoTa repo.</li>
+<li>Nog meer voorbeeldsketches vind je in de IoTa repo onder <code>software/arduino/</code>.</li>
 
 
 </ul>
