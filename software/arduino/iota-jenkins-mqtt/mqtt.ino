@@ -3,6 +3,7 @@
 PubSubClient client(espClient);
 char base_topic[100];
 char will_topic[200];
+char* mqtt_node_id;
 
 void mqtt_reconnect() {
   while (!client.connected()) {
@@ -38,6 +39,10 @@ void callback(char* topic, byte* payload, unsigned int length) {
 void setupMqtt() {
   client.setServer(mqtt_server, 1883);
   client.setCallback(callback);
+
+  String client_id = "jenkins-";
+  client_id += String(random(0xffffff), HEX);
+  mqtt_node_id = (char*)client_id.c_str();
 }
 
 void loopMqtt() {

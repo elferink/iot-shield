@@ -3,7 +3,6 @@
 const char* ssid = "";
 const char* password = "";
 
-const char* mqtt_node_id = "";
 const char* mqtt_server = "";
 
 const char* jenkins_status_topic_1 = "";
