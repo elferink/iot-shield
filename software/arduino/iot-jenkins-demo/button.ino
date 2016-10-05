@@ -4,8 +4,8 @@ OneButton button(BUTTONPIN, true);
 
 void setupButton() {
   pinMode(BUTTONPIN, INPUT);
-  //button.setClickTicks(200);
-  //button.setPressTicks(400);
+  button.setClickTicks(200);
+  button.setPressTicks(400);
   button.attachClick(doBuild);
 }
 

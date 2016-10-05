@@ -11,31 +11,21 @@ CRGB leds[NUM_LEDS];
 #define APADATAPIN 13 // D7
 #define APACLOCKPIN 14 // D5
 
-uint8_t hue = 0;
-uint8_t currentPatternNumber = 0;
-uint8_t color = 0;
+void setRgbLeds(CRGB color);
+void setRgbLed(short ledno, CRGB color);
 
 void setupApa() {
   FastLED.addLeds<LED_TYPE, APADATAPIN, APACLOCKPIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
   FastLED.setBrightness(BRIGHTNESS);
 }
 
-void statusColor(uint8_t status) {
-  if (status == 0) {
-    leds[0] = CRGB::Green;
-    leds[1] = CRGB::Green;
-  }
-  if (status == 1) {
-    leds[0] = CRGB::Red;
-    leds[1] = CRGB::Red;
-  }
-  if (status == 2) {
-    leds[0] = CRGB::Yellow;
-    leds[1] = CRGB::Yellow;
-  }
-  if (status == 3) {
-    leds[0] = CRGB::Black;
-    leds[1] = CRGB::Black;
-  }
+void setRgbLed(short ledno, CRGB color) {
+  leds[ledno] = color;
   FastLED.show();
+}
+
+void setRgbLeds(CRGB color) {
+  for (short i = 0; i < NUM_LEDS; i++) {
+    setRgbLed(i, color);
+  }
 }

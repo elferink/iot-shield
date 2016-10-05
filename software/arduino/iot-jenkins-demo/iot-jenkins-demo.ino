@@ -1,23 +1,18 @@
-const char* ssid = "iot-workshop";        
-const char* password = "123456ab"; 
+#define WIFI_SSID ""
+#define WIFI_PASSWORD  ""
 
-const uint8_t BUILD_SUCCESS = 0;
-const uint8_t BUILD_FAIL = 1;
-const uint8_t BUILD_UNSTABLE = 2;
-const uint8_t BUILD_WAIT = 3;
+#define MQTT_SERVER_HOST "firefly.topicus.local"
+#define MQTT_SERVER_PORT 1883
 
-uint8_t lastChecked = 0;
-uint8_t status;
+#define MQTT_TOPIC_1 "jenkins/job/iot-workshop/"
+#define MQTT_TOPIC_2 "jenkins/job/Cobra_master/"
 
 #include <ESP8266HTTPClient.h>
-#include <ArduinoJson.h>
-#include <ESP8266WiFi.h>
 
 void setupGeneral() {
   Serial.begin(115200);
   Serial.println();
   Serial.println();
-  status = BUILD_WAIT;
 }
 
 void setup() {
@@ -25,56 +20,25 @@ void setup() {
   setupWifi();
   setupButton();
   setupApa();
+  setupMqtt();
 }
 
 void loop() {
   loopButton();
-  if (millis() - lastChecked > 5000) {   
-    getBuildStatus();
-    lastChecked = millis();
-    statusColor(status);
-  }
+  loopMqtt();
 }
 
 void doBuild() {
   Serial.println("doBuild");
   HTTPClient http;
-  http.begin("http://172.16.33.228:8080/job/test/build?delay=0sec");
+  http.begin("http://192.168.56.103:8080/buildByToken/build?job=iot-workshop&token=SuperSecret");
   int httpCode = http.GET();
-  if(httpCode == 200) {
-    status = BUILD_WAIT;
-    statusColor(status);
-    Serial.println("HTTP OK");
+  if(httpCode == 201) {
+    Serial.println("OK: HTTP 201 Created");
   }
   else
   {
-    Serial.println("HTTP NOT OK");
+    Serial.print("NOT OK: HTTP ");
+    Serial.println(httpCode);
   }
 }
-
-void getBuildStatus() {
-  Serial.println("getBuildStatus");
-  HTTPClient http;
-  http.begin("http://172.16.33.228:8080/job/test/lastBuild/api/json?tree=number,result");
-  int httpCode = http.GET();
-  if(httpCode == 200) {
-    StaticJsonBuffer<200> jsonBuffer;
-    String response = http.getString();
-    JsonObject& json = jsonBuffer.parseObject(response);
-    Serial.println("json: " + response);
-    status = stringToStatus(json["result"]);
-  }
-}
-
-uint8_t stringToStatus(const char* str) {
-  Serial.print("stringToStatus: ");
-  Serial.println(str);
-  if(strcmp("SUCCESS",str)==0) {
-    return BUILD_SUCCESS;
-  }
-  if(strcmp("UNSTABLE",str)==0) {
-    return BUILD_UNSTABLE;
-  }
-  return BUILD_FAIL;
-}
-
