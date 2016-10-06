@@ -20,6 +20,10 @@ void setupApa() {
 }
 
 void setRgbLed(short ledno, CRGB color) {
+  if(color)//dan is hij niet zwart; https://github.com/FastLED/FastLED/wiki/Pixel-reference#comparing-colors
+  {
+    lastColor[ledno] = color;
+  }
   leds[ledno] = color;
   FastLED.show();
 }
@@ -29,3 +33,11 @@ void setRgbLeds(CRGB color) {
     setRgbLed(i, color);
   }
 }
+
+//by is tussen 0-256
+void dimRgbLed(short ledno, short by) {
+  leds[ledno].fadeToBlackBy( by );
+}
+
+
+

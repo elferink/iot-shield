@@ -37,6 +37,7 @@ void callback(char* topic, byte* payload, short length) {
 
   if (topic_str.endsWith(MQTT_TOPIC_1)) {
     statusColor(0, current_status);
+    updateBuildStatus = false;
   } else if (topic_str.endsWith(MQTT_TOPIC_2)) {
     statusColor(1, current_status);
   }
