@@ -1,6 +1,7 @@
-#include <PubSubClient.h>
+#include <AsyncMqttClient.h>
 
-PubSubClient client(espClient);
+AsyncMqttClient mqttClient;
+
 char base_topic[200];
 char will_topic[300];
 char game_topic[300];
@@ -18,24 +19,20 @@ int response_time = 0;
 #define STATUS_GO         2
 #define STATUS_FINISHED   3
 
-void mqtt_reconnect() {
-  while (!client.connected()) {
-    Serial.println("mqtt reconnect");
+void updateGameStatus();
+String getValue(String data, char separator, int index);
+void pub(char *topic, char *value);
 
-    if (client.connect(mqtt_node_id, mqtt_username, mqtt_password, will_topic, 2, true, "0")) {
-      Serial.println("mqtt connected");
-      client.publish(will_topic, "1", true);
-      client.subscribe(game_topic, 1);
-    } else {
-      delay(1000);
-    }
-  }
+void onMqttConnect(bool sessionPresent) {
+  Serial.println("mqtt connected");
+  mqttClient.publish(will_topic, 2, true, "1");
+  mqttClient.subscribe(game_topic, 2);
 }
 
-void callback(char* topic, byte* payload, unsigned int length) {
-  char content[length + 1];
-  memcpy(content, payload, length);
-  content[length] = 0;
+void onMqttMessage(char* topic, char* payload, AsyncMqttClientMessageProperties properties, size_t len, size_t index, size_t total) {
+  char content[len + 1];
+  memcpy(content, payload, len);
+  content[len] = 0;
 
   String topic_str = String(topic);
   Serial.print("Received on ");
@@ -48,10 +45,10 @@ void callback(char* topic, byte* payload, unsigned int length) {
 
     Serial.print("Game number: ");
     Serial.println(new_game_number);
-    
+
     char unsub_topic[300];
     sprintf(unsub_topic, "%s/%d/#", base_topic, game_number);                        // game/10/#
-    client.unsubscribe(unsub_topic);
+    mqttClient.unsubscribe(unsub_topic);
     Serial.print("Unsubscribed: ");
     Serial.println(unsub_topic);
 
@@ -59,7 +56,8 @@ void callback(char* topic, byte* payload, unsigned int length) {
 
     char sub_topic[300];
     sprintf(sub_topic, "%s/%d/#", base_topic, game_number);                        // game/10/#
-    client.subscribe(sub_topic);
+    mqttClient.subscribe(sub_topic, 2);
+
     Serial.print("Subscribed: ");
     Serial.println(sub_topic);
 
@@ -117,12 +115,12 @@ void pubFloat(char *topic, float value) {
 void pub(char *topic, char *value) {
   char full_topic[200];
   sprintf(full_topic, "%s/%s", base_topic, topic);
-  client.publish(full_topic, value);
+  mqttClient.publish(full_topic, 2, false, value);
 }
 
 void setupMqtt() {
-  client.setServer(mqtt_server, mqtt_port);
-  client.setCallback(callback);
+  mqttClient.onConnect(onMqttConnect);
+  mqttClient.onMessage(onMqttMessage);
 
   String client_id = "game-";
   client_id += mac;
@@ -139,14 +137,12 @@ void setupMqtt() {
   Serial.println(game_topic);
   Serial.print("will_topic: ");
   Serial.println(will_topic);
-}
 
-void loopMqtt() {
-  if (!client.connected()) {
-    mqtt_reconnect();
-  } else {
-    client.loop();
-  }
+  mqttClient.setServer(mqtt_server, 1883);
+  mqttClient.setKeepAlive(5).setCleanSession(false).setWill(will_topic, 2, true, "0").setClientId(mqtt_node_id);
+  Serial.println("Connecting to MQTT...");
+  mqttClient.connect();
+
 }
 
 String getValue(String data, char separator, int index)

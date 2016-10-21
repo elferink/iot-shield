@@ -6,6 +6,10 @@ const char* mqtt_username = "";
 const char* mqtt_password = "";
 const int   mqtt_port = 1883;
 
+void setupMqtt();
+void setupButton();
+void loopButton();
+
 void setupGeneral() {
   Serial.begin(115200);
   Serial.println();
@@ -23,6 +27,5 @@ void setup() {
 
 void loop() {
   loopButton();
-  loopMqtt();
   loopApa();
 }

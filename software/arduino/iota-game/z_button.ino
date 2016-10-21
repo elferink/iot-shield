@@ -8,10 +8,7 @@ void singleClick();
 
 void setupButton() {
   pinMode(BUTTONPIN, INPUT);
-
   button.setClickTicks(1);
-//  button.setPressTicks(600);
-
   button.attachClick(singleClick);
 }
 
