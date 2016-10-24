@@ -30,7 +30,7 @@ void statusColor(short ledno, short status) {
       setRgbLed(ledno,CRGB::Red);
       break;
     case BUILD_ABORTED:
-      setRgbLed(ledno,CRGB::Orange);
+      setRgbLed(ledno,CRGB::LightSalmon);
       break;
     case BUILD_UNSTABLE:
       setRgbLed(ledno,CRGB::Yellow);

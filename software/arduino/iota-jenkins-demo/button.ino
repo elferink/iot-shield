@@ -6,7 +6,8 @@ void setupButton() {
   pinMode(BUTTONPIN, INPUT);
   button.setClickTicks(200);
   button.setPressTicks(400);
-  button.attachClick(doBuild);
+  button.attachClick(doBuild0);
+  button.attachLongPressStop(doBuild1);
 }
 
 void loopButton() {

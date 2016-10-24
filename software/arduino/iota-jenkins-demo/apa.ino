@@ -2,7 +2,7 @@
 
 #define LED_PIN     5
 #define NUM_LEDS    2
-#define BRIGHTNESS  32
+#define BRIGHTNESS  16
 #define LED_TYPE    APA102
 #define COLOR_ORDER BGR
 

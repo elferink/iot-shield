@@ -12,8 +12,8 @@ void mqtt_reconnect() {
 
     if (client.connect((char*)mqtt_node_id.c_str())) {
       Serial.println("mqtt connected");
-      client.subscribe(MQTT_TOPIC_1);
-      client.subscribe(MQTT_TOPIC_2);
+      client.subscribe(MQTT_TOPICS[0].c_str());
+      client.subscribe(MQTT_TOPICS[1].c_str());
     } else {
       Serial.print("mqtt connected failed, rc=");
       Serial.println(client.state());
@@ -35,11 +35,12 @@ void callback(char* topic, byte* payload, short length) {
   Serial.print(" to ");
   Serial.println(content);
 
-  if (topic_str.endsWith(MQTT_TOPIC_1)) {
+  if (topic_str.endsWith(MQTT_TOPICS[0])) {
     statusColor(0, current_status);
-    updateBuildStatus = false;
-  } else if (topic_str.endsWith(MQTT_TOPIC_2)) {
+    updateBuildStatus[0] = false;
+  } else if (topic_str.endsWith(MQTT_TOPICS[1])) {
     statusColor(1, current_status);
+    updateBuildStatus[1] = false;
   }
 }
 
