@@ -4,8 +4,6 @@
 
 OneButton button(BUTTONPIN, true);
 
-void singleClick();
-
 void setupButton() {
   pinMode(BUTTONPIN, INPUT);
   button.setClickTicks(1);

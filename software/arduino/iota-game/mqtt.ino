@@ -19,9 +19,7 @@ int response_time = 0;
 #define STATUS_GO         2
 #define STATUS_FINISHED   3
 
-void updateGameStatus();
-String getValue(String data, char separator, int index);
-void pub(char *topic, char *value);
+void onMqttMessage(char* topic, char* payload, AsyncMqttClientMessageProperties properties, size_t len, size_t index, size_t total);
 
 void onMqttConnect(bool sessionPresent) {
   Serial.println("mqtt connected");
