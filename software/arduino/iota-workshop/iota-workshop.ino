@@ -7,8 +7,8 @@
 /**
    Config, pas onderstaande waardes aan!
 */
-#define WIFI_SSID           "My Wifi"
-#define WIFI_PASSWORD       "My Password"
+#define WIFI_SSID           "iot-workshop"
+#define WIFI_PASSWORD       "PoweredByTopicus"
 #define RGB_LED_BRIGHTNESS  32 // 0-255
 
 /*
