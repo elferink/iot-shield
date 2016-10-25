@@ -1,6 +1,6 @@
-**Survey sketch**
+**Game sketch**
 
-Simple game using multiple Iota's. Who's the fastest when the traffic light turns green?
+Simple game using multiple Iota's. Who's the fastest when the light turns green?
 
 **MQTT Topics**
 
