@@ -15,7 +15,7 @@ int go_time = 0;
 int response_time = 0;
 
 #define STATUS_WAITING    0
-#define STATUS_READY      1
+#define STATUS_COUNTDOWN  1
 #define STATUS_GO         2
 #define STATUS_FINISHED   3
 
@@ -71,8 +71,8 @@ void onMqttMessage(char* topic, char* payload, AsyncMqttClientMessageProperties 
         old_status = game_status;
         if (strcmp(content, "WAITING") == 0) {
           game_status = STATUS_WAITING;
-        } else if (strcmp(content, "READY") == 0) {
-          game_status = STATUS_READY;
+        } else if (strcmp(content, "COUNTDOWN") == 0) {
+          game_status = STATUS_COUNTDOWN;
         } else if (strcmp(content, "GO") == 0) {
           game_status = STATUS_GO;
         } else if (strcmp(content, "FINISHED") == 0) {
@@ -166,7 +166,7 @@ void updateGameStatus() {
         setRgbLed(1, CRGB::Black);
         setRgbLed(0, CRGB::Red);
         break;
-      case STATUS_READY:
+      case STATUS_COUNTDOWN:
         setRgbLed(1, CRGB::Black);
         setRgbLed(0, CRGB::Yellow);
         break;

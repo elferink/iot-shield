@@ -20,6 +20,7 @@ bool pressed = false;
 void setupApa() {
   FastLED.addLeds<LED_TYPE, APADATAPIN, APACLOCKPIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
   FastLED.setBrightness(BRIGHTNESS);
+  setRgbLeds(CRGB::Black);
 }
 
 void loopApa() {

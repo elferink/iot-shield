@@ -11,9 +11,6 @@ game = dict(
 mqtt_client = object()
 state = dict()
 
-def on_connect(mqtt_client, userdata, flags, rc):
-    game_new()
-
 def on_message(mqtt_client, userdata, msg):
     global game
     
@@ -47,7 +44,7 @@ def game_new():
         clients = 0,
         loop_counter_ready = -1,
         loop_counter_go = 5,
-        loop_counter_finished = 15,
+        loop_counter_finished = 10,
         loop_counter_clients = 5,
         winner = ['',0]
     )
@@ -96,14 +93,14 @@ def game_finished():
     if game['loop_counter_finished'] == 0:
         print "FINISHED"
         mqtt_client.publish("game/"+str(game['nr'])+"/status", "FINISHED", 2, True)
-        mqtt_client.publish("game/"+str(game['nr'])+"/game['winner']", game['winner'][0], 2, True)
+        mqtt_client.publish("game/"+str(game['nr'])+"/winner", game['winner'][0], 2, True)
         print "and the game['winner'] is...... %s" % game['winner'][0]
         game['loop_counter_finished']-=1
         return
     elif game['loop_counter_finished'] > 0:
         game['loop_counter_finished']-=1
     elif game['loop_counter_finished'] == -1:
-        game_new(mqtt_client)
+        game_new()
 
         
 def game_loop():
@@ -113,7 +110,6 @@ def game_loop():
 
 #init code
 mqtt_client = paho.Client("gameclient_"+str(os.getpid()), False) # False = nocleanstart
-mqtt_client.on_connect = on_connect
 mqtt_client.on_message = on_message
 mqtt_client.connect("mqtt.topicusonderwijs.nl", 1883)
 
