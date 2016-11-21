@@ -1,3 +1,6 @@
+#include <LM75.h>
+#include <Wire.h>
+
 #include <ESP8266HTTPClient.h>
 #include <ESP8266WiFi.h>
 #include "OneButton.h"
@@ -11,11 +14,22 @@
 
 #define BUTTON_PIN          0   // D3
 OneButton button(BUTTON_PIN, true);
+LM75 temp_sensor;
+
+float getTemperature() {
+  temp_sensor.shutdown(false);
+  delay(100);
+  float temperature = temp_sensor.temp();
+  temp_sensor.shutdown(true);
+  return temperature;
+}
 
 void setup() {
   Serial.begin(115200);
   delay(10);
   Serial.println();
+
+  Wire.begin();
 
   WiFi.mode(WIFI_STA);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
@@ -45,6 +59,8 @@ void singleClick() {
   url += IFTTT_EVENT;
   url += "/with/key/";
   url += IFTTT_KEY;
+  url += "?value1=";
+  url += String(getTemperature());
 
   HTTPClient http;
   http.begin(url); 
