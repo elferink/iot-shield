@@ -1,4 +1,4 @@
-# Topiconf 2016 WeMos IoT shield
+# WeMos IoT shield
 
 ![Alt text](/assets/top.png?raw=true)![Alt text](/assets/bottom.png?raw=true)
 
