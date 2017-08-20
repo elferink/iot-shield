@@ -23,3 +23,7 @@
 | nc         | D6            | D12~ MISO            |
 | APA102 MOSI| D7            | D13~ MOSI            |
 | nc         | D8            | D15~ SS              |
+
+## Hardware design
+Hardware design by Bart Schapendonk, Jeroen Idserda en Thijs Elferink.
+See original files: https://github.com/topicusonderwijs/iota
