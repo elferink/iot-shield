@@ -1,6 +1,7 @@
 # WeMos IoT shield
 
-![Alt text](/assets/top.png?raw=true)![Alt text](/assets/bottom.png?raw=true)
+<img src="assets/top.png?raw=true" alt="top" width="300"/>
+<img src="assets/bottom.png?raw=true" alt="bottom" width="300"/>
 
 ## Features
 
