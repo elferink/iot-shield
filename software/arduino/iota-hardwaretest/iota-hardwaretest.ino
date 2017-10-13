@@ -3,14 +3,19 @@
 #include <Wire.h>
 #include <LM75.h>
 #include <FastLED.h>
+#include <PubSubClient.h>
 
 /**
    Config, pas onderstaande waardes aan!
 */
-#define WIFI_SSID           "iot-workshop"
-#define WIFI_PASSWORD       "PoweredByTopicus"
+#define WIFI_SSID           "LessWire"
+#define WIFI_PASSWORD       "yo-mama123"
 #define RGB_LED_BRIGHTNESS  10 // 0-255
 
+#define MQTT_SERVER         "52.57.219.134"
+#define MQTT_PORT           1883
+#define MQTT_USERNAME       ""
+#define MQTT_PASSWORD       ""
 /*
    Constanten
 */
@@ -29,6 +34,8 @@
 OneButton button(BUTTON_PIN, true);
 LM75 temp_sensor;
 CRGB leds[RGB_NUM_LEDS];
+WiFiClient espClient;
+PubSubClient mqtt_client(espClient);
 
 boolean led_on = false;
 boolean rgb_leds_on = false;
@@ -44,13 +51,7 @@ void singleClick() {
 }
 
 void doubleClick() {
-  rgb_leds_on = !rgb_leds_on;
-
-  if (rgb_leds_on) {
-    setRgbLeds(CRGB::Green);
-  } else {
-    setRgbLeds(CRGB::Black);
-  }
+  singleClick();
 }
 
 void longPress() {
@@ -121,6 +122,21 @@ void setRgbLed(int ledno, CRGB color) {
 }
 
 /*
+   MQTT callback, wordt aangroepen bij ontvangst van een bericht
+ */
+void mqtt_callback(char* topic, byte* payload, unsigned int length) {
+  char content[length + 1];
+  memcpy(content, payload, length);
+  content[length] = 0;
+
+  String topic_str = String(topic);
+  Serial.print("Ontvangen op ");
+  Serial.print(topic);
+  Serial.print(": ");
+  Serial.println(content);
+}
+
+/*
    Deze functie wordt eenmalig aangroepen bij opstarten
 */
 void setup() {
@@ -148,6 +164,25 @@ void setup() {
   FastLED.setBrightness(RGB_LED_BRIGHTNESS);
   setRgbLeds(CRGB::Black); // beide leds uit
 
+  // Wifi instellen
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  Serial.print("Wifi verbinden");
+
+  // Wachten tot wifi verbonden is
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(200);
+    Serial.print(".");
+  }
+
+  Serial.println(" verbonden!");
+  Serial.print("IP: ");
+  Serial.println(WiFi.localIP());
+  
+  // MQTT configureren
+  mqtt_client.setServer(MQTT_SERVER, MQTT_PORT);
+  mqtt_client.setCallback(mqtt_callback);
+  
   // Lees beide sensoren uit
   readSensors();
 }
@@ -158,7 +193,7 @@ void setup() {
 void loop() {
   // Laat knop controleren of er activiteit geweest is
   button.tick();
-  if(getLuminance() > 200 ) {
+  if(getLuminance() > 40 ) {
     led_on = true;
   }
   else
@@ -173,12 +208,6 @@ void loop() {
       cycle_idx++;
       if(cycle_idx>3) {
         cycle_idx=0;
-      }
-    }
-    else
-    {
-      if(getTemperature() > 20.0) {
-        setRgbLeds(CRGB::Pink);
       }
     }
   }

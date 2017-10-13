@@ -4,19 +4,16 @@
 #include <LM75.h>
 #include <FastLED.h>
 
-/**
-   Config, pas onderstaande waardes aan!
-*/
-#define WIFI_SSID           "LessWire"
-#define WIFI_PASSWORD       "yo-mama123"
-#define RGB_LED_BRIGHTNESS  32 // 0-255
-
 /*
    Constanten
 */
+#define WIFI_SSID           "iot-workshop"
+#define WIFI_PASSWORD       "123456ab"
+
 #define BUTTON_PIN          0   // D3
 #define LED_PIN             2   // D4
 
+#define RGB_LED_BRIGHTNESS  10 // 0-255
 #define RGB_LED_DATA_PIN    13  // D7
 #define RGB_LED_CLOCK_PIN   14  // D5
 #define RGB_NUM_LEDS        2
@@ -29,26 +26,23 @@
 OneButton button(BUTTON_PIN, true);
 LM75 temp_sensor;
 CRGB leds[RGB_NUM_LEDS];
+WiFiClient espClient;
 
 boolean led_on = false;
 boolean rgb_leds_on = false;
+boolean cycle = false;
+short cycle_idx = 0;
+CRGB cycle_arr[] = {CRGB::Red, CRGB::Green, CRGB::Blue, CRGB::Black};
 
 /*
    Functies om gebruik van de knop af te handelen
 */
 void singleClick() {
-  led_on = !led_on;
-  setLed(led_on);
+  cycle = !cycle;
 }
 
 void doubleClick() {
-  rgb_leds_on = !rgb_leds_on;
-
-  if (rgb_leds_on) {
-    setRgbLeds(CRGB::Green);
-  } else {
-    setRgbLeds(CRGB::Black);
-  }
+  singleClick();
 }
 
 void longPress() {
@@ -149,18 +143,19 @@ void setup() {
   // Wifi instellen
   WiFi.mode(WIFI_STA);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  Serial.println(WiFi.hostname());
   Serial.print("Wifi verbinden");
 
   // Wachten tot wifi verbonden is
   while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
+    delay(200);
     Serial.print(".");
   }
 
   Serial.println(" verbonden!");
   Serial.print("IP: ");
   Serial.println(WiFi.localIP());
-
+   
   // Lees beide sensoren uit
   readSensors();
 }
@@ -171,4 +166,22 @@ void setup() {
 void loop() {
   // Laat knop controleren of er activiteit geweest is
   button.tick();
+  if(getLuminance() > 40 ) {
+    led_on = true;
+  }
+  else
+  {
+    led_on = false;
+  }
+  setLed(led_on);
+
+  EVERY_N_SECONDS(1) {
+    if(cycle) {
+      setRgbLeds(cycle_arr[cycle_idx]);
+      cycle_idx++;
+      if(cycle_idx>3) {
+        cycle_idx=0;
+      }
+    }
+  }
 }
